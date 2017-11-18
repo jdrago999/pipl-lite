@@ -35,10 +35,10 @@ module Pipl
       case response.code
       when 200..299
         # Return the top 0-5 matches, sorted by score in descending order:
-        JSON.parse(response.body, symbolize_names: true)[:possible_persons]
-          .select{ |person| person[:@match] > 0 }
+        json = JSON.parse(response.body, symbolize_names: true)
+        (json.key?(:person) ? [json[:person]] : json[:possible_persons].select{ |person| person[:@match] > 0 })
           .sort_by{ |x| x[:@match] }
-          .reverse[0..4]
+          .reverse[0..4] rescue []
       else
         raise ResponseError.new(response)
       end
