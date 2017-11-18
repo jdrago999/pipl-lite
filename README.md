@@ -16,8 +16,8 @@ gem 'pipl-lite'
 In your code:
 
 ```ruby
-Pipl.configure(key: ENV.fetch('PIPL_KEY'))
-result = Pipl.search(
+Pipl::Lite.configure(key: ENV.fetch('PIPL_KEY'))
+result = Pipl::Lite.search(
   raw_name: 'Clark Kent',
   country: 'US',
   state: 'KS',
